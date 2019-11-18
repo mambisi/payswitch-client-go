@@ -27,12 +27,12 @@ type CardPaymentRequest struct {
 
 func (c *CardPaymentRequest) Validate() error {
 	return validation.ValidateStruct(c,
-		validation.Field(&c.Amount, validation.Required),
+		validation.Field(&c.Amount, validation.Required, validation.Length(12, 12)),
 		validation.Field(&c.ProcessingCode, validation.Required),
 		validation.Field(&c.RSwitch, validation.Required),
 		validation.Field(&c.Desc, validation.Required),
 		validation.Field(&c.MerchantID, validation.Required),
-		validation.Field(&c.TransactionID, validation.Required),
+		validation.Field(&c.TransactionID, validation.Required, validation.Length(12, 12)),
 		//CardPaymentRequest Specific Fields
 		validation.Field(&c.Pan, validation.Required),
 		validation.Field(&c.RedirectUrl, validation.Required),
@@ -42,7 +42,6 @@ func (c *CardPaymentRequest) Validate() error {
 		validation.Field(&c.Currency, validation.Required),
 		validation.Field(&c.CardHolder, validation.Required),
 		validation.Field(&c.CustomerEmail, validation.Required),
-
 	)
 }
 
