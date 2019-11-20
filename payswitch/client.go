@@ -16,27 +16,14 @@ type ApiClient struct {
 	FundTransferService *FundTransferService
 }
 
-/*
-
-{
-  "transaction_id":"000000000000",
-  "status": "approved",
-  "code": "000",
-  "reason": "Transaction successful!"
-	"r_switch": "VIS",
-    "subscriber_number": "************1999",
-    "amount": 1
-}
-
-*/
 type ApiResult struct {
 	TransactionID    string  `json:"transaction_id"`
 	Status           string  `json:"status"`
 	Code             string  `json:"code"`
 	Reason           string  `json:"reason"`
-	RSwitch          *string `json:"r_switch"`
-	SubscriberNumber *string `json:"subscriber_number"`
-	Amount           *string `json:"amount"`
+	RSwitch          string  `json:"r_switch"`
+	SubscriberNumber string  `json:"subscriber_number"`
+	Amount           float64 `json:"amount"`
 }
 
 type VerifyApiResult struct {
@@ -142,4 +129,5 @@ func (s *VerificationService) VerifyTransaction(id string, merchant string) (*Ap
 		return nil, errors.New(string(resp.Body()))
 	}
 
+	return &res, nil
 }
