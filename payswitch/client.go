@@ -48,7 +48,7 @@ func NewApiClient(username string, key string, live bool) *ApiClient {
 
 	h := resty.New().EnableTrace().SetBasicAuth(username, key)
 
-	var baseUrl = "https://prod.theteller.net "
+	var baseUrl = "https://prod.theteller.net"
 
 	if !live {
 		baseUrl = "https://test.theteller.net"

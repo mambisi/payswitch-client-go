@@ -57,17 +57,18 @@ func TestPaymentService_ProcessMobileMoneyPayment(t *testing.T) {
 
 	pUsername := os.Getenv("PAYSWITCH_USERNAME")
 	pApiKey := os.Getenv("PAYSWITCH_API_KEY")
+	pMID := os.Getenv("PAYSWITCH_M_ID")
 
-	psc := NewApiClient(pUsername, pApiKey, false)
+	psc := NewApiClient(pUsername, pApiKey, true)
 
 	req := MobileMoneyPaymentRequest{}
 	req.RSwitch = "MTN"
 	req.ProcessingCode = "000200"
 	req.TransactionID = generateTransactionID()
-	req.MerchantID = "TTM-00000865"
+	req.MerchantID = pMID
 	req.Amount = "000000000200"
 	req.Desc = "Test Payment"
-	req.SubscriberNumber = "0550000002"
+	req.SubscriberNumber = "024000001"
 
 	res, err := psc.PaymentService.ProcessMobileMoneyPayment(&req)
 
@@ -88,6 +89,8 @@ func TestVerificationService_VerifyTransaction(t *testing.T) {
 
 	pUsername := os.Getenv("PAYSWITCH_USERNAME")
 	pApiKey := os.Getenv("PAYSWITCH_API_KEY")
+	pMID := os.Getenv("PAYSWITCH_M_ID")
+
 	psc := NewApiClient(pUsername, pApiKey, false)
 
 	amount, err := helper.ConvT12DigitAmount(3.25)
@@ -100,7 +103,7 @@ func TestVerificationService_VerifyTransaction(t *testing.T) {
 	req.RSwitch = "VIS"
 	req.ProcessingCode = "000000"
 	req.TransactionID = generateTransactionID()
-	req.MerchantID = "TTM-00000865"
+	req.MerchantID = pMID
 	req.Amount = amount
 	req.Pan = "4448366600675430"
 	req.Cvv = "330"
