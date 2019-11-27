@@ -66,9 +66,9 @@ func TestPaymentService_ProcessMobileMoneyPayment(t *testing.T) {
 	req.ProcessingCode = "000200"
 	req.TransactionID = generateTransactionID()
 	req.MerchantID = pMID
-	req.Amount = "000000000200"
+	req.Amount = "000000000100"
 	req.Desc = "Test Payment"
-	req.SubscriberNumber = "024000001"
+	req.SubscriberNumber = "0500000002"
 
 	res, err := psc.PaymentService.ProcessMobileMoneyPayment(&req)
 

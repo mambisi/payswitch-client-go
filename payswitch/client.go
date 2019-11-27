@@ -27,13 +27,13 @@ type ApiResult struct {
 }
 
 type VerifyApiResult struct {
-	TransactionID    string  `json:"transaction_id"`
-	Status           string  `json:"status"`
-	Code             string  `json:"code"`
-	Reason           string  `json:"reason"`
-	RSwitch          *string `json:"r_switch"`
-	SubscriberNumber *string `json:"subscriber_number"`
-	Amount           *string `json:"amount"`
+	TransactionID    string `json:"transaction_id"`
+	Status           string `json:"status"`
+	Code             string `json:"code"`
+	Reason           string `json:"reason"`
+	RSwitch          string `json:"r_switch"`
+	SubscriberNumber string `json:"subscriber_number"`
+	Amount           string `json:"amount"`
 }
 
 type service struct {
@@ -110,7 +110,7 @@ func (s *PaymentService) ProcessMobileMoneyPayment(m *MobileMoneyPaymentRequest)
 	return &res, nil
 }
 
-func (s *VerificationService) VerifyTransaction(id string, merchant string) (*ApiResult, error) {
+func (s *VerificationService) VerifyTransaction(id string, merchant string) (*VerifyApiResult, error) {
 	if len(id) != 12 {
 		return nil, errors.New("invalid id len < 12")
 	}
@@ -122,7 +122,7 @@ func (s *VerificationService) VerifyTransaction(id string, merchant string) (*Ap
 		return nil, err
 	}
 
-	res := ApiResult{}
+	res := VerifyApiResult{}
 
 	err = json.Unmarshal(resp.Body(), &res)
 	if err != nil {
