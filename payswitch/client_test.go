@@ -2,7 +2,6 @@ package payswitch
 
 import (
 	"github.com/joho/godotenv"
-	"github.com/mambisi/payswitch-client-go/payswitch/helper"
 	"math/rand"
 	"os"
 	"testing"
@@ -93,7 +92,7 @@ func TestVerificationService_VerifyTransaction(t *testing.T) {
 
 	psc := NewApiClient(pUsername, pApiKey, false)
 
-	amount, err := helper.ConvT12DigitAmount(3.25)
+	amount, err := ConvT12DigitAmount(3.25)
 
 	if err != nil {
 		t.Fatal(err)
@@ -144,6 +143,6 @@ func TestVerificationService_VerifyTransaction(t *testing.T) {
 func generateTransactionID() string {
 	rand.Seed(time.Now().UnixNano())
 	k := rand.Intn(9999)
-	t, _ := helper.ConvT12DigitTransactionID(k)
+	t, _ := ConvT12DigitTransactionID(k)
 	return t
 }
